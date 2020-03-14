@@ -1,0 +1,1 @@
+export const logIn = () => ({ type: 'SIGN_IN'});
