@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Login from './Login';
 import Dashboard from './Dashboard';
-import { useSelector } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default function Home() {
-  const isLogged = useSelector(state => state.isLogged);
-
+function Home({ user }) {
   return (
     <div className="Home">
-    {!isLogged
-      ? <Login />
-      : <Dashboard />
+    {!user.isLoggedIn
+      ? <Redirect to="/login" />
+      : <Redirect to="/dashboard" />
     }
+    <Route path="/login" component={Login} />
+    <Route path="/dashboard" component={Dashboard} />
     </div>
   )
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(Home);

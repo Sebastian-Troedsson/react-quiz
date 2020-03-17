@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { logIn } from './actions';
+import { logIn } from './actions/user';
+import { connect } from 'react-redux';
 
-export default function Login() {
+function Login({ logIn }) {
   const [inputValue, setInputValue] = useState('');
-  const dispatch = useDispatch();
 
   const handleClick = () => {
     if(inputValue !== '') {
-      dispatch(logIn());
+      logIn(inputValue);
     }
   }
 
@@ -20,3 +19,5 @@ export default function Login() {
     </div>
   )
 }
+
+export default connect(null, { logIn })(Login)

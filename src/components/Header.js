@@ -3,7 +3,7 @@ import './style/Header.css';
 
 export default function Header() {
   return (
-    <header class="header">
+    <header className="header">
       <h1>QuizWar</h1>
     </header>
   )
