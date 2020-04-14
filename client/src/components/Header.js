@@ -1,10 +1,12 @@
 import React from 'react';
-import './style/Header.css';
 
-export default function Header() {
+
+function Header() {
   return (
     <header className="header">
-      <h1>QuizWar</h1>
+      <span>Quiz</span>
     </header>
   )
 }
+
+export default Header
