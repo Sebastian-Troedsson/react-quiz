@@ -37,7 +37,7 @@ const formatCategoryName = (categories) => {
  * @returns {function} using redux-thunk to dispatch.
  */
 const fetchCategories = () => (dispatch) => {
-  axios.get('https://opentdb.com/api_category.php')
+  return axios.get('https://opentdb.com/api_category.php')
     .then(res => dispatch(fetchCategoriesSuccess(formatCategoryName(res.data.trivia_categories))))
     .catch(err => dispatch(fetchCategoriesFail(err.message)));
 };

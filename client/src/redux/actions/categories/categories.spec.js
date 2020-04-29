@@ -1,5 +1,9 @@
+import moxios from 'moxios';
+
 import { FETCH_CATEGORIES_SUCCESS, FETCH_CATEGORIES_FAIL } from '../types';
-import { fetchCategoriesSuccess, fetchCategoriesFail } from './';
+import fetchCategories, { fetchCategoriesSuccess, fetchCategoriesFail } from './';
+import { storeFactory } from '../../../../utils/testUtils';
+import { initialState } from '../../reducers/categories/';
 
 describe('categories actions', () => {
   it('returns correct action', () => {
@@ -19,6 +23,19 @@ describe('categories actions', () => {
 
     expect(fetchCategoriesFail('Thats a bummer')).toStrictEqual(expected);
   });
+
+  describe('getCategories action', () => {
+    beforeEach(() => {
+      moxios.install();
+    });
+
+    afterEach(() => {
+      moxios.uninstall();
+    })
+
+    it('adds categories to state', (done) => {
+      
+    });
+  });
 });
 
-/* DONT FORGET THE FETCHCATEGORIES ACTION WITH AXIOS */
