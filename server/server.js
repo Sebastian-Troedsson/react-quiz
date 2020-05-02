@@ -1,13 +1,11 @@
 const express = require('express');
+const cors = require('cors');
+
 const server = express();
-const connectDB = require('./config/db');
 
-connectDB();
-
+server.use(cors());
 server.use(express.json());
 
-server.use('/api/user', require('./routes/user'));
+server.use('/api/questions', require('./routes').questionsRouter);
 
-const PORT = process.env.PORT || 5000;
-
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+module.exports = server;

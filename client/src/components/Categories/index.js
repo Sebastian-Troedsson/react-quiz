@@ -5,35 +5,36 @@ import Loader from 'react-loader-spinner';
 import fetchCategories from '../../redux/actions/categories';
 import './styles.scss';
 
-export const Categories = ({ categories, loading, error, fetchCategories }) => {
+export const Categories = ({ categories, loading, fetchCategories }) => {
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
 
-  let display;
+  let content;
 
   if (loading) {
-    display =
+    content = (
       <div data-test="loading-categories">
         <Loader type="Rings" color="#00BFFF" height={80} width={80} />
-      </div>;
-  } else if (error) {
-    display = <div data-test="error-categories">{error}</div>;
+      </div>
+    );
   } else {
-    display = categories.map((category) => <div className="card-categories" key={category.id}>{category.name}</div>);
+    content = categories.map((category) => <div className="card-categories" key={category.id}>{category.name}</div>);
   }
 
   return (
-    <div className="container-categories" data-test="component-categories">
-      {display}
-    </div>
-  )
-}
+    <>
+      <h1>Choose a subject!</h1>
+      <div className="container-categories" data-test="component-categories">
+        {content}
+      </div>
+    </>
+  );
+};
 
 const mapStateToProps = (state) => ({
-  categories: state.categories.categories,
+  categories: state.categories.data,
   loading: state.categories.loading,
-  error: state.categories.error,
 });
 
 export default connect(mapStateToProps, { fetchCategories })(Categories);

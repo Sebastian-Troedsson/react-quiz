@@ -3,37 +3,24 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  margin: 0 200px;
+  margin-top: 80px;
 }
 
 .card-categories {
   font-family: 'Amatic SC', cursive;
   font-size: 24px;
-  width: 250px;
+  width: 13%;
   height: 150px;
   margin: 15px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background-color: rgba(85, 187, 165, 0.911);
+  color: #fff;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  animation: breathing 7s infinite ease-in-out;
-}
-
-@keyframes breathing {
-  0% {
-    transform: scale(0.99);
-  }
-  25% {
-    transform: scale(1.01);
-  }
-  50% {
-    transform: scale(0.99);
-  }
-  75% {
-    transform: scale(1.01);
-  }
-  100% {
-    transform: scale(0.99);
+  &:hover {
+    transform: scale(1.05);
   }
 }

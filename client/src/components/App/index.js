@@ -5,7 +5,7 @@ import './styles.scss';
 
 const App = () => (
   <div className="app">
-    <Categories categories={['lol', 'a', 'b']} />
+    <Categories />
   </div>
 );
 

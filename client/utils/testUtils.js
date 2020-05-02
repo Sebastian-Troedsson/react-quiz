@@ -11,9 +11,9 @@ const middleware = [thunk];
  * @param {object} initialState Initial state for store.
  * @returns {Store} - Redux store.
  */
-export const storeFactory = (initialState) => {
-  return createStore(rootReducer, initialState, applyMiddleware(...middleware));
-};
+export const storeFactory = (initialState) => (
+  createStore(rootReducer, initialState, applyMiddleware(...middleware))
+);
 
 /**
  * Return node(s) with the given data-test attribute.

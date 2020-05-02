@@ -1,11 +1,10 @@
 import moxios from 'moxios';
 
-import { FETCH_CATEGORIES_SUCCESS, FETCH_CATEGORIES_FAIL } from '../types';
-import fetchCategories, { fetchCategoriesSuccess, fetchCategoriesFail } from './';
+import { FETCH_CATEGORIES_SUCCESS } from '../types';
+import fetchCategories, { fetchCategoriesSuccess } from '.';
 import { storeFactory } from '../../../../utils/testUtils';
-import { initialState } from '../../reducers/categories/';
 
-describe('categories actions', () => {
+describe('categories action creator', () => {
   it('returns correct action', () => {
     const expected = {
       type: FETCH_CATEGORIES_SUCCESS,
@@ -15,27 +14,39 @@ describe('categories actions', () => {
     expect(fetchCategoriesSuccess(['art'])).toStrictEqual(expected);
   });
 
-  it('returns correct action', () => {
-    const expected = {
-      type: FETCH_CATEGORIES_FAIL,
-      payload: 'Thats a bummer',
-    };
-
-    expect(fetchCategoriesFail('Thats a bummer')).toStrictEqual(expected);
-  });
-
-  describe('getCategories action', () => {
+  describe('getCategories thunk function', () => {
     beforeEach(() => {
       moxios.install();
     });
 
     afterEach(() => {
       moxios.uninstall();
-    })
+    });
 
-    it('adds categories to state', (done) => {
-      
+    /* Integration test, uses both reducer and action */
+    it('adds categories to state when called', (done) => {
+      const store = storeFactory();
+      const data = [
+        { id: 1, name: 'Science' },
+        { id: 2, name: 'Art' },
+      ];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: data,
+        });
+      });
+
+      const expectedState = { categories: { data, loading: false } };
+
+      return store.dispatch(fetchCategories())
+        .then(() => {
+          const newState = store.getState();
+          expect(newState).toStrictEqual(expectedState);
+          done();
+        });
     });
   });
 });
-

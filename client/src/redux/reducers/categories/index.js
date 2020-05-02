@@ -1,20 +1,15 @@
-import { FETCH_CATEGORIES_SUCCESS, FETCH_CATEGORIES_FAIL } from '../../actions/types';
+import { FETCH_CATEGORIES_SUCCESS } from '../../actions/types';
 
 export const initialState = {
+  data: null,
   loading: true,
-  categories: null,
-  error: null,
 };
 
-const categories = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_CATEGORIES_SUCCESS:
-      return { ...state, loading: false, categories: action.payload };
-    case FETCH_CATEGORIES_FAIL:
-      return { ...state, loading: false, error: action.payload };
+      return { data: action.payload, loading: false };
     default:
       return state;
-  };
+  }
 };
-
-export default categories;
